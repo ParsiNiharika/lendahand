@@ -23,14 +23,37 @@ newPeriod.text=content.text
 
 newArray.push(newPeriod)
 
-let result=await colObj.update({mail:{$eq:content.mail}},{$set:{dayName:newArray}})
-res.send({message:'text added'})
+if(dayName==='monday'){
+    let result=await colObj.updateOne({mail:{$eq:content.mail}},{$set:{monday:newArray}})
+    res.send({message:'text added'})
+}
+
+if(dayName==='tuesday'){
+    let result=await colObj.updateOne({mail:{$eq:content.mail}},{$set:{tuesday:newArray}})
+    res.send({message:'text added'})
+}
+
+if(dayName==='wednesday'){
+    let result=await colObj.updateOne({mail:{$eq:content.mail}},{$set:{monday:newArray}})
+    res.send({message:'text added'})
+}
 
 
 
+if(dayName==='thursday'){
+    let result=await colObj.updateOne({mail:{$eq:content.mail}},{$set:{thursday:newArray}})
+    res.send({message:'text added'})
+}
 
+if(dayName==='friday'){
+    let result=await colObj.updateOne({mail:{$eq:content.mail}},{$set:{friday:newArray}})
+    res.send({message:'text added'})
+}
 
-
+if(dayName==='saturday'){
+    let result=await colObj.updateOne({mail:{$eq:content.mail}},{$set:{saturday:newArray}})
+    res.send({message:'text added'})
+}
 
 
 }))
