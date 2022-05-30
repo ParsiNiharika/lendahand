@@ -4,10 +4,27 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
+var mc=require("mongodb").MongoClient
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+var adminApi=require('./routes/admin')
 
 var app = express();
+ dburl="mongodb+srv://mock:mock@nandakishor.gzlym.mongodb.net/mockdata?retryWrites=true&w=majority"
+
+mc.connect(dburl,{useUnifiedTopology:true,useNewUrlParser:true},(err,client)=>{
+
+if(err){
+  console.log('error in connection',err)
+
+}
+else{
+  console.log('database connected')
+  const dbObj=client.db('mockdata')
+  app.set('databaseObject',dbObj)
+}
+
+})
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -18,6 +35,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use('/admin',adminApi)
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
